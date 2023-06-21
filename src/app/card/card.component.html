@@ -1,0 +1,22 @@
+<div class="card my-3" >
+  <img
+  src = "{{personaje.image}}"
+  class="card-img-top" alt="{{personaje.name}}"
+  alt="{{personaje.name}}"
+  />
+
+  <div class="card-body">
+    <h5 class="card-title">{{personaje.name}}</h5>
+    <p class="card-text">
+      Status: {{personaje.status}}
+      <br>
+      Especie: {{personaje.species}}
+    </p>
+
+
+
+    <button (click)="borrarPersonaje()" class="boton-bonito">Borrar</button>
+    <button class="btn btn-primary" (click)="editarPersonaje()" class="boton-bonito">Editar</button>
+
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="container my-5">
+  <div class="header-container">
+    <h1 class="titulo-principal" (click)="refreshPage()">Rik y Morti Wiki</h1>
+    <button class="boton-bonito" (click)="abrirFormulario()">Añadir Personaje</button>
+  </div>
+  <hr />
+
+  <form (ngSubmit)="buscarPersonaje()" class="contenedor-inline">
+    <input type="text" class="input" [(ngModel)]="nombrePersonaje" name="nombrePersonaje"
+      placeholder="Ingrese el nombre del personaje">
+    <button type="submit" class="boton-bonito">Buscar</button>
+  </form>
+
+  <div class="row">
+    <div *ngFor="let personaje of personajes" class="col-xl-4 col-sm6 col-xs-12">
+      <app-card [personaje]="personaje" (borrarPersonajeClick)="deletePersonaje($event)"
+        (editarPersonajeClick)="editarPersonaje($event)"></app-card>
+    </div>
+
+    <div *ngIf="personajeNoEncontrado" class="mensaje-no-encontrado">
+      No se encontró ningún personaje con el nombre "{{ nombrePersonaje }}"
+    </div>
+  </div>
+
+
+
+  <div *ngIf="mostrarFormulario" class="popup-overlay"></div>
+
+  <div *ngIf="mostrarFormulario" class="popup-form">
+    <h2>Añadir Personaje</h2>
+    <form (submit)="agregarPersonaje()" class="form-container">
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" [(ngModel)]="nuevoPersonaje.name" name="name" class="form-input">
+      </div>
+
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <input type="text" id="status" [(ngModel)]="nuevoPersonaje.status" name="status" class="form-input">
+      </div>
+
+      <div class="form-group">
+        <label for="species">Species:</label>
+        <input type="text" id="species" [(ngModel)]="nuevoPersonaje.species" name="species" class="form-input">
+      </div>
+
+      <div class="form-group">
+        <label for="imagen">Imagen:</label>
+        <select id="imagen" [(ngModel)]="nuevoPersonaje.image" name="imagen" class="form-input">
+          <option *ngFor="let imagen of imagenesGenericas" [value]="imagen.url">{{ imagen.nombre }}</option>
+        </select>
+      </div>
+
+      <button type="submit" class="form-button">Guardar</button>
+    </form>
+  </div>
+</div>
